@@ -1,0 +1,17 @@
+{
+  "Headers": {
+      "User-Agent": "Silly Meter Twitter Notifier Bot by Max Rodriguez @Mottito_Ravioli",
+      "From": "sillymetertwitterbot@gmail.com",
+      "Accept-Language": "en-us,",
+      "Server": "Silly Meter Twitter Bot, https://twitter.com/SillyMeterSystm"
+  },
+
+  "AppKeys": {
+      "consumer_key": "[CONSUMER DEV APP KEY]",
+      "consumer_secret": "[CONSUMER SECRET DEV APP KEY]",
+      "access_key": "[ACCESS DEV APP KEY]",
+      "access_secret": "[ACCESS SECRET DEV APP KEY]"
+  },
+  
+  "SillyMeterAPI": "https://www.toontownrewritten.com/api/sillymeter"
+}
