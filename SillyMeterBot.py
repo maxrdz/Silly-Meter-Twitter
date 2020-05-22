@@ -165,7 +165,7 @@ class Main:
 					message = message + " The silly meter is about to reach maximum silly particles!!"
 					send_tweet(message, usualImg)
 
-			print(f"Requesting API again in {convert_to_hours(self.nextUpdate) * 60} minutes.")
+			print(f"Requesting API again in {self.nextUpdate / 60} minutes.")
 			time.sleep(self.nextUpdate + 5)
 			# Gives API 5 secs to update when (updateTime - asOf) = 0 secs.
 
