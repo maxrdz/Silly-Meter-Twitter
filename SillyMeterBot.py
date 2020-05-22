@@ -160,6 +160,7 @@ class Main:
 			print(convert_to_hours(self.nextUpdate))
 			time.sleep(self.nextUpdate + 5)
 			# Gives API 5 secs to update when (updateTime - asOf) = 0 secs.
+			# ^^ Will avoid spamming requests to API when it is updating its data.
 
 
 Main()
