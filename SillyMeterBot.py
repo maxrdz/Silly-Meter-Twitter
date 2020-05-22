@@ -42,33 +42,37 @@ access_secret = jsonFile["AppKeys"]["access_secret"]
 
 
 def authenticate():
-	try:
-		authentication = tweepy.OAuthHandler(consumer_key, consumer_secret)
-		authentication.set_access_token(access_token, access_secret)
-		twitter_api = tweepy.API(authentication, wait_on_rate_limit=True)
-		print("Successfully Authenticated to Twitter API!")
-		return twitter_api
-	except:
-		time.sleep(10)
-		authenticate()
+	for retry in range(10):
+		try:
+			authentication = tweepy.OAuthHandler(consumer_key, consumer_secret)
+			authentication.set_access_token(access_token, access_secret)
+			twitter_api = tweepy.API(authentication, wait_on_rate_limit=True)
+			print("Successfully Authenticated to Twitter API!")
+			return twitter_api
+		except Exception:
+			time.sleep(10)
+	return False
 
 
 api = authenticate()
 
+if not api:
+	print("Could not authenticate to Twitter API, returning Exit code 1.")
+	exit(1)
+	# Exit code 1: Error
+
 
 def get_silly_points():
-	def get_response():
+	for retry in range(10):
 		try:
 			request = requests.get(url=apiURL, params=None, headers=sendHeaders)
 			print("Successfully got data from API, www.toontownrewritten.com/api/sillymeter.")
+			break
 		except Exception:
 			time.sleep(30)
-			request = get_response()
-			# Recurse infinitely with intervals of 30 seconds until it gets a response.
-		finally:
-			return request
-	response = get_response()
-	received = response.json()
+			# Intervals of 30 seconds until it gets a response.
+
+	received = request.json()
 	return received
 
 
@@ -77,7 +81,7 @@ def send_tweet(text, img):
 		api.update_with_media(img, text)
 		print("Successfully sent tweet!")
 		time.sleep(10)
-		# ^^ in case, preventing spam.
+		# ^^ Just in case, Preventing spam.
 	except Exception:
 		time.sleep(10)
 		send_tweet(text, img)
@@ -108,6 +112,7 @@ class Main:
 			# Check for new updates in data, if so then tweet.
 			if self.state == "Reward":
 				if not checked_max:
+					checked_active = False
 					message = f"Gadzooks! The silly meter had maxed!! All of Toontown now has the active reward, {self.winner}!"
 					message = message + f" The reward will last {convert_to_hours(self.nextUpdate)} hours!"
 					send_tweet(message, maxedImg)
@@ -140,6 +145,7 @@ class Main:
 					checked_inactive_end = False
 					message = f"The silly meter is back to operational!! Get in Toontown and defeat some cogs!"
 					send_tweet(message, usualImg)
+					checked_active = True
 
 				elif self.particles >= 1600000 and checked_points == 1:
 					checked_points += 1
@@ -159,7 +165,7 @@ class Main:
 					message = message + " The silly meter is about to reach maximum silly particles!!"
 					send_tweet(message, usualImg)
 
-			print(convert_to_hours(self.nextUpdate))
+			print(f"Requesting API again in {convert_to_hours(self.nextUpdate) * 60} minutes.")
 			time.sleep(self.nextUpdate + 5)
 			# Gives API 5 secs to update when (updateTime - asOf) = 0 secs.
 
