@@ -76,8 +76,10 @@ def send_tweet(text, img):
 	try:
 		api.update_with_media(img, text)
 		print("Successfully sent tweet!")
+		time.sleep(10)
+		# ^^ in case, preventing spam.
 	except Exception:
-		time.sleep(5)
+		time.sleep(10)
 		send_tweet(text, img)
 
 
@@ -160,7 +162,6 @@ class Main:
 			print(convert_to_hours(self.nextUpdate))
 			time.sleep(self.nextUpdate + 5)
 			# Gives API 5 secs to update when (updateTime - asOf) = 0 secs.
-			# ^^ Will avoid spamming requests to API when it is updating its data.
 
 
 Main()
