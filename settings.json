@@ -7,10 +7,10 @@
   },
 
   "AppKeys": {
-      "consumer_key": "[CONSUMER DEV APP KEY]",
-      "consumer_secret": "[CONSUMER SECRET DEV APP KEY]",
-      "access_key": "[ACCESS DEV APP KEY]",
-      "access_secret": "[ACCESS SECRET DEV APP KEY]"
+      "consumer_key": "x7PxAXc2akeTsYqrBsOOy26as",
+      "consumer_secret": "lQP9H0lTt44X6jFqDI0rgYEHYwBvHcgZjezrCavRe61qqdRgWz",
+      "access_token": "1262878543781883904-sd04Rd4jLCTiDVba2ToBYWX1XFkRui",
+      "access_secret": "tiG8KlghzhNQDKzdmeJO52kwvLblkvj51PWYo4KRiYPX5"
   },
   
   "SillyMeterAPI": "https://www.toontownrewritten.com/api/sillymeter"
