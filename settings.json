@@ -7,10 +7,10 @@
   },
 
   "AppKeys": {
-      "consumer_key": "x7PxAXc2akeTsYqrBsOOy26as",
-      "consumer_secret": "lQP9H0lTt44X6jFqDI0rgYEHYwBvHcgZjezrCavRe61qqdRgWz",
-      "access_token": "1262878543781883904-sd04Rd4jLCTiDVba2ToBYWX1XFkRui",
-      "access_secret": "tiG8KlghzhNQDKzdmeJO52kwvLblkvj51PWYo4KRiYPX5"
+      "consumer_key": "[Your Twitter Key]",
+      "consumer_secret": "[Your Twitter Key]",
+      "access_token": "[Your Twitter Key]",
+      "access_secret": "[Your Twitter Key]"
   },
   
   "SillyMeterAPI": "https://www.toontownrewritten.com/api/sillymeter"
