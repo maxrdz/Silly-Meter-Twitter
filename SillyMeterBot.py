@@ -159,7 +159,7 @@ class Main:
 					message = message + " The meter is now half way full until it reaches maximum silly particles!"
 					send_tweet(message, usualImg)
 
-				elif self.particles >= 4500000 and checked_points == 3:
+				elif self.particles >= 4800000 and checked_points == 3:
 					checked_points = 1
 					message = f"The silly meter has reached {self.particles} particles!!"
 					message = message + " The silly meter is about to reach maximum silly particles!!"
