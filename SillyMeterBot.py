@@ -131,6 +131,7 @@ class Main:
 					message = f"The silly meter is currently cooling down! "
 					message = message + f"The meter will return to functional in {convert_to_hours(self.nextUpdate)} hours!"
 					send_tweet(message, inactiveImg)
+                                        self.nextUpdate = self.nextUpdate - 7200
 					checked_inactive = True
 
 				elif convert_to_hours(self.nextUpdate) <= 2 and (not checked_inactive_end):
