@@ -108,6 +108,7 @@ class Main:
 			self.winner = str(meter_status["winner"])
 			self.state = meter_status["state"]
 			self.nextUpdate = int(meter_status["nextUpdateTimestamp"]) - int(meter_status["asOf"])
+                        print(f"Silly Particles: {self.particles}")
 
 			# Check for new updates in data, if so then tweet.
 			if self.state == "Reward":
