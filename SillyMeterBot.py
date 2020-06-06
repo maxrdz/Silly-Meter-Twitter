@@ -99,6 +99,7 @@ class Main:
 		checked_points = 1
 		checked_inactive = False
 		checked_inactive_end = False
+		checked_almost_max = False
 
 		while True:
 			meter_status = get_silly_points()
@@ -108,12 +109,13 @@ class Main:
 			self.winner = str(meter_status["winner"])
 			self.state = meter_status["state"]
 			self.nextUpdate = int(meter_status["nextUpdateTimestamp"]) - int(meter_status["asOf"])
-                        print(f"Silly Particles: {self.particles}")
+			print(f"Silly Particles: {self.particles}")
 
 			# Check for new updates in data, if so then tweet.
 			if self.state == "Reward":
 				if not checked_max:
 					checked_active = False
+					checked_almost_max = False
 					message = f"Gadzooks! The silly meter had maxed!! All of Toontown now has the active reward, {self.winner}!"
 					message = message + f" The reward will last {convert_to_hours(self.nextUpdate)} hours!"
 					send_tweet(message, maxedImg)
@@ -132,7 +134,7 @@ class Main:
 					message = f"The silly meter is currently cooling down! "
 					message = message + f"The meter will return to functional in {convert_to_hours(self.nextUpdate)} hours!"
 					send_tweet(message, inactiveImg)
-                                        self.nextUpdate = self.nextUpdate - 7200
+					self.nextUpdate = self.nextUpdate - 7200
 					checked_inactive = True
 
 				elif convert_to_hours(self.nextUpdate) <= 2 and (not checked_inactive_end):
@@ -149,20 +151,21 @@ class Main:
 					send_tweet(message, usualImg)
 					checked_active = True
 
-				elif self.particles >= 1600000 and checked_points == 1:
+				elif self.particles >= 1600000 and checked_points == 1 and checked_almost_max == False:
 					checked_points += 1
 					message = f"The silly meter has reached {self.particles} particles!!"
 					message = message + " The meter is now one third full until it reaches maximum silly particles!"
 					send_tweet(message, usualImg)
 
-				elif self.particles >= 2500000 and checked_points == 2:
+				elif self.particles >= 2500000 and checked_points == 2 and checked_almost_max == False:
 					checked_points += 1
 					message = f"The silly meter has reached {self.particles} particles!!"
 					message = message + " The meter is now half way full until it reaches maximum silly particles!"
 					send_tweet(message, usualImg)
 
-				elif self.particles >= 4800000 and checked_points == 3:
+				elif self.particles >= 4800000 and checked_points == 3 and checked_almost_max == False:
 					checked_points = 1
+                                        checked_almost_max = True
 					message = f"The silly meter has reached {self.particles} particles!!"
 					message = message + " The silly meter is about to reach maximum silly particles!!"
 					send_tweet(message, usualImg)
