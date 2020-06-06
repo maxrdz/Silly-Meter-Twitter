@@ -165,7 +165,7 @@ class Main:
 
 				elif self.particles >= 4800000 and checked_points == 3 and checked_almost_max == False:
 					checked_points = 1
-                                        checked_almost_max = True
+					checked_almost_max = True
 					message = f"The silly meter has reached {self.particles} particles!!"
 					message = message + " The silly meter is about to reach maximum silly particles!!"
 					send_tweet(message, usualImg)
